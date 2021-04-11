@@ -69,8 +69,39 @@ router.get('/populatedworkouts', (req, res) => {
     db.Workout.find({}).sort({date:'asc'})
     .populate('exercises')
     .then(dbWorkout => {
-        res.render({workouts: dbWorkout})
+        res.render({workouts: dbWorkout});
     }).catch(err => {
         res.json(err);
     });
+});
+
+router.get('/api/workouts', ({ body }, res) => {
+    db.Workout.create({ name: body.name })
+        .then(dbWorkout => {
+            console.log(dbWorkout);
+            res.send(dbWorkout);
+        })
+        .catch(({ message }) => {
+            console.log(message);
+        });
+});
+
+router.delete('/api/exercises', ({ body }, res) => {
+    db.Exercise.deleteOne({_id: body._id}, function (err) {
+        if (err) throw err;
+        console.log('Sucessfully deleted!');
+        res.redirect('/');
+    });
+});
+
+router.delete('/api/workouts', ({ body }, res) => {
+    db.Workout.deleteOne({_id: body._id}, function (err) {
+        if (err) throw err;
+        console.log('Successfully deleted!');
+        res.redirect('/');
+    });
+});
+
+router.listen(PORT, () => {
+    console.log(`Router running on port ${PORT}!`);
 });
