@@ -44,7 +44,7 @@ router.post('/api/exercises', ({ body }, res) => {
     console.table(newObject);
 
     db.Exercise.create(newObject)
-        .then(({ _id }) => db.Workout.findOneAndUpdate({_id: body._id}, { $push: { exercisesL _id } }, { new: true }))
+        .then(({ _id }) => db.Workout.findOneAndUpdate({_id: body._id}, { $push: { exercises: _id } }, { new: true }))
         .then(dbWorkout => {
             console.log(dbWorkout);
             res.send(dbWorkout);
@@ -52,4 +52,25 @@ router.post('/api/exercises', ({ body }, res) => {
             console.log(err);
             res.send(err);
         });    
+});
+
+router.get('/api/exercises', (req, res) => {
+    db.Exercise.findOneAndUpdate({_id: req.body._id}, req.body, { new: true })
+    .then(dbExercise => {
+        res.send(dbExercise);
+        console.log(dbExercise);
+    }).catch(err => {
+        res.send(err);
+        console.log(err);
+    });
+});
+
+router.get('/populatedworkouts', (req, res) => {
+    db.Workout.find({}).sort({date:'asc'})
+    .populate('exercises')
+    .then(dbWorkout => {
+        res.render({workouts: dbWorkout})
+    }).catch(err => {
+        res.json(err);
+    });
 });
