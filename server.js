@@ -5,7 +5,6 @@ const exphbs = require('express-handlebars');
 const PORT = process.env.PORT || 3001
 
 const db = require('./models');
-const { table } = require('node:console');
 
 const router = express();
 
@@ -19,7 +18,7 @@ router.use(express.static('public'));
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/fitnessdb', {
     useNewUrlParser: true,
-    useFindAndModify
+    useFindAndModify: false
 });
 
 router.get('/', (req, res) => {
