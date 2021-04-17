@@ -17,7 +17,7 @@ With this fitness tracker the user can create custom workout plans and track the
 * Repeat
 * Get strong!
 
-![Fitness Tracker]()
+![Fitness Tracker](./assets/fitnesstracker.png)
 
 
 ## Built With
