@@ -439,3 +439,7 @@ form > button {
     right: -320px;
   }
 }
+
+#dashboard {
+  text-align: right;
+}
