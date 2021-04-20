@@ -4,7 +4,7 @@
 With this fitness tracker the user can create custom workout plans and track them! This application utilizes Node JS, Express, and Mongoose DB. This app has full Create, Read and Update functionality for all entered info.
 
 ## Link to deployed App
-* Click [here]() to use!
+* Click [here](https://limitless-meadow-66832.herokuapp.com/) to use!
 
 * Create a workout regimen by entering the name under 'Enter Workout' 
 * In new box, create new exercises by enter the name, quantity, and unit for each exercise as well as an optional note. _Example:_
