@@ -11,10 +11,15 @@ router.use(express.json());
 router.use(express.static("public"));
 router.use(logger("dev"));
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-});
+mongoose.connect(
+  process.env.MONGODB_URI || 'mongodb://localhost/workout',
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+  }
+);
 
 router.use(require("./routes/api.js"));
 router.use(require("./routes/html.js"));
