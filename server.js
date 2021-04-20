@@ -2,8 +2,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const logger = require("morgan");
 
-const PORT = process.env.PORT || 3001;
-
 const router = express();
 
 router.use(express.urlencoded({ extended: true }));
@@ -24,6 +22,6 @@ mongoose.connect(
 router.use(require("./routes/api.js"));
 router.use(require("./routes/html.js"));
 
-router.listen(PORT, () => {
-  console.log(`Router running on port ${PORT}!`);
+router.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
