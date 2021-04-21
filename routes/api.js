@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
-const db = require("../models");
+const Workout = require("../models/workout");
 
 mongoose.connect("mongodb://localhost/workout", {
   useNewUrlParser: true,
@@ -8,7 +8,7 @@ mongoose.connect("mongodb://localhost/workout", {
 });
 
 router.get("/api/workouts/range", (req, res) => {
-  db.Workout.find({})
+  Workout.find({})
     .then((data) => {
       res.json(data);
     })
@@ -18,7 +18,7 @@ router.get("/api/workouts/range", (req, res) => {
 });
 
 router.get("/api/workouts", (req, res) => {
-  db.Workout.find({})
+  Workout.find({})
     .sort({ day: -1 })
     .limit(1)
     .then((data) => {
@@ -30,7 +30,7 @@ router.get("/api/workouts", (req, res) => {
 });
 
 router.post("/api/workouts", (req, res) => {
-  db.Workout.create(req.body)
+  Workout.create(req.body)
     .then((data) => {
       res.json(data);
     })
@@ -40,14 +40,14 @@ router.post("/api/workouts", (req, res) => {
 });
 
 router.put("/api/workouts/:id", (req, res) => {
-  db.Workout.findOneAndUpdate(
+  Workout.findOneAndUpdate(
     { _id: req.params.id },
     { $push: { exercises: req.body } },
     { upsert: true, new: true }
   )
     .then((data) => {
       let duration = data.calcDuration();
-      db.Workout.findOneAndUpdate(
+      Workout.findOneAndUpdate(
         { _id: req.params.id },
         { $set: { totalDuration: duration } }
       ).then((updated) => {
