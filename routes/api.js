@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const mongoose = require("mongoose");
-const Workout = require("../models/workout.js");
+const Workout = require("../models/Workout.js");
 
 mongoose.connect("mongodb://localhost/workout", {
   useNewUrlParser: true,
