@@ -1,11 +1,5 @@
 const router = require("express").Router();
-const mongoose = require("mongoose");
 const Workout = require("../models/Workout.js");
-
-mongoose.connect("mongodb://localhost/workout", {
-  useNewUrlParser: true,
-  useFindAndModify: false,
-});
 
 router.get("/api/workouts/range", (req, res) => {
   Workout.find({})
